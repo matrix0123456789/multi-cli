@@ -1,3 +1,5 @@
+import {Buffer} from "./Buffer";
+
 const {spawn} = require('child_process');
 let currentTask = null;
 let isInside = false;
@@ -6,21 +8,10 @@ class SubTask {
     constructor(path, args = []) {
         this.name = path;
         this.buffer = '';
-        const ls = spawn(path, args);
+        const proc = spawn(path, args);
+this.buffer=new Buffer(proc);
 
-        ls.stdout.on('data', (data) => {
-            this.buffer += data;
-            //console.log(`stdout: ${data}`);
-            this.draw();
-        });
-
-        ls.stderr.on('data', (data) => {
-            this.buffer += data;
-            // console.error(`stderr: ${data}`);
-            this.draw();
-        });
-
-        ls.on('close', (code) => {
+        proc.on('close', (code) => {
             // console.log(`child process exited with code ${code}`);
         });
     }
@@ -30,30 +21,7 @@ class SubTask {
         this.drawBuffer();
     }
 
-    drawBuffer() {
-        let ix = 0, iy = 0;
-        process.stdout.cursorTo(this.x + ix, this.y + 1);
-        for (let bufpos = 0; bufpos < this.buffer.length; bufpos++) {
-            const char = this.buffer[bufpos];
-            if (char == '\n') {
-                ix = 0;
-                iy++;
-                process.stdout.cursorTo(this.x + ix, this.y + iy + 1);
-            } else if (char == '\r') {
-                ix = 0;
-                process.stdout.cursorTo(this.x + ix, this.y + iy + 1);
-            } else {
-                process.stdout.write(char);
-                ix++;
-                if (ix >= this.width) {
-                    ix = 0;
-                    iy++;
 
-                    process.stdout.cursorTo(this.x + ix, this.y + iy + 1);
-                }
-            }
-        }
-    }
 
     drawHeader() {
         process.stdout.cursorTo(this.x, this.y);
