@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="482aef29-c5ab-4fb7-b530-e5d56a27c59f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Buffer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Buffer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Buffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buffer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,14 +46,53 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="$PROJECT_DIR$/node_modules/mocha" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunManager">
-    <configuration name="main.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/main.js" working-dir="$PROJECT_DIR$/src">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\matri\Documents\GitHub\LIB\multitasker\tests" />
+      <recent name="C:\Users\matri\Documents\GitHub\LIB\multitasker\Buffer" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\matri\Documents\GitHub\LIB\multitasker" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.test">
+    <configuration name="main.mjs" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/main.mjs" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="sample buffer read.1" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/tests/Buffer.js</test-file>
+      <test-names>
+        <name value="sample buffer read" />
+        <name value="1" />
+      </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.main.js" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="Mocha.sample buffer read.1" />
+        <item itemvalue="Node.js.main.mjs" />
       </list>
     </recent_temporary>
   </component>
@@ -66,7 +106,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580556516243</updated>
-      <workItem from="1580556517553" duration="7741000" />
+      <workItem from="1580556517553" duration="7752000" />
+      <workItem from="1581154749999" duration="2614000" />
     </task>
     <servers />
   </component>
@@ -74,87 +115,85 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2517" height="492" key="GridCell.Tab.0.bottom" timestamp="1580559614573">
+    <state x="980" y="367" key="#sample_buffer_read.1" timestamp="1581156676048">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.0.center" timestamp="1580559614573">
+    <state x="980" y="367" key="#sample_buffer_read.1/0.0.2560.1400@0.0.2560.1400" timestamp="1581156676048" />
+    <state x="905" y="295" key="CommitChangelistDialog2" timestamp="1581155374674">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.0.left" timestamp="1580559614573">
+    <state x="905" y="295" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1581155374674" />
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom" timestamp="1581157356586">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.0.right" timestamp="1580559614573">
+    <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1581157356586" />
+    <state width="2517" height="401" key="GridCell.Tab.0.center" timestamp="1581157356585">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1580559614573">
+    <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1581157356585" />
+    <state width="2517" height="401" key="GridCell.Tab.0.left" timestamp="1581157356585">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.1.center" timestamp="1580559614573">
+    <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1581157356585" />
+    <state width="2517" height="401" key="GridCell.Tab.0.right" timestamp="1581157356586">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.1.left" timestamp="1580559614573">
+    <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1581157356586" />
+    <state width="2517" height="492" key="GridCell.Tab.1.bottom" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.1.right" timestamp="1580559614573">
+    <state width="2517" height="492" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.1.center" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.2.bottom" timestamp="1580559614574">
+    <state width="2517" height="492" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.1.left" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.2.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614574" />
-    <state width="2517" height="492" key="GridCell.Tab.2.center" timestamp="1580559614573">
+    <state width="2517" height="492" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.1.right" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.2.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.2.left" timestamp="1580559614573">
+    <state width="2517" height="492" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.2.bottom" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.2.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.2.right" timestamp="1580559614573">
+    <state width="2517" height="492" key="GridCell.Tab.2.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.2.center" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.2.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614573" />
-    <state width="2517" height="492" key="GridCell.Tab.3.bottom" timestamp="1580559614574">
+    <state width="2517" height="492" key="GridCell.Tab.2.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.2.left" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.3.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614574" />
-    <state width="2517" height="492" key="GridCell.Tab.3.center" timestamp="1580559614574">
+    <state width="2517" height="492" key="GridCell.Tab.2.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.2.right" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.3.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614574" />
-    <state width="2517" height="492" key="GridCell.Tab.3.left" timestamp="1580559614574">
+    <state width="2517" height="492" key="GridCell.Tab.2.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.3.bottom" timestamp="1580569230360">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.3.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614574" />
-    <state width="2517" height="492" key="GridCell.Tab.3.right" timestamp="1580559614574">
+    <state width="2517" height="492" key="GridCell.Tab.3.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230360" />
+    <state width="2517" height="492" key="GridCell.Tab.3.center" timestamp="1580569230359">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="492" key="GridCell.Tab.3.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580559614574" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/main.js</url>
-          <line>66</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/main.js</url>
-          <line>56</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state width="2517" height="492" key="GridCell.Tab.3.center/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.3.left" timestamp="1580569230359">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="492" key="GridCell.Tab.3.left/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state width="2517" height="492" key="GridCell.Tab.3.right" timestamp="1580569230359">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="492" key="GridCell.Tab.3.right/0.0.2560.1400@0.0.2560.1400" timestamp="1580569230359" />
+    <state x="1065" y="411" key="RollbackChangesDialog" timestamp="1581155372668">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1065" y="411" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1581155372668" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1581157368476">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581157368476" />
   </component>
 </project>

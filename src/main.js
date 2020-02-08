@@ -1,6 +1,6 @@
-import {Buffer} from "./Buffer";
+import {Buffer} from "./Buffer.js";
 
-const {spawn} = require('child_process');
+import {spawn} from "child_process"
 let currentTask = null;
 let isInside = false;
 
@@ -9,10 +9,17 @@ class SubTask {
         this.name = path;
         this.buffer = '';
         const proc = spawn(path, args);
-this.buffer=new Buffer(proc);
+        this.buffer = new Buffer(proc);
 
         proc.on('close', (code) => {
             // console.log(`child process exited with code ${code}`);
+        });
+        proc.stdout.on('data', (data) => {
+            this.buffer.addRaw(data);
+        });
+
+        proc.stderr.on('data', (data) => {
+            this.buffer.addRaw(data);
         });
     }
 
@@ -22,11 +29,10 @@ this.buffer=new Buffer(proc);
     }
 
 
-
     drawHeader() {
         process.stdout.cursorTo(this.x, this.y);
-        if (this === currentTask&&isInside) {
-                process.stdout.write('\x1B[7m');
+        if (this === currentTask && isInside) {
+            process.stdout.write('\x1B[7m');
         }
         let position = 0;
         while (position < (this.width - this.name.length) / 2) {
@@ -34,7 +40,7 @@ this.buffer=new Buffer(proc);
             position++;
         }
         //process.stdout.write('\x1B[4m');
-        if (this === currentTask&&!isInside) {
+        if (this === currentTask && !isInside) {
             process.stdout.write('\x1B[7m');
         }
         process.stdout.write(this.name);
@@ -46,15 +52,18 @@ this.buffer=new Buffer(proc);
         }
         process.stdout.write('\x1B[0m');
     }
+    drawBuffer(){
+        this.buffer.redraw(this.x, this.y+1);
+    }
 }
 
 let tasks = process.argv.splice(2).map(x => {
     const parsed = parseCommand(x);
     return new SubTask(parsed.executable, parsed.args)
 });
-currentTask=tasks[0];
+currentTask = tasks[0];
 
-const tty = require('tty');
+import tty from "tty";
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.setRawMode(true);

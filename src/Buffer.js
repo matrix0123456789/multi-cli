@@ -1,26 +1,18 @@
 export class Buffer {
-    constructor(width, height, childProcess) {
+    constructor(width = 80, height = 25, writeToStdOut = true) {
         this.width = width;
         this.height = height;
         this._raw = '';
-        this._screen = null;
+        this.screen = [];
         this._x = 0;
         this._y = 0;
-        childProcess.stdout.on('data', (data) => {
-            this._raw += data;
-        });
-
-        childProcess.stderr.on('data', (data) => {
-            this._raw += data;
-        });
+        this.writeToStdOut = writeToStdOut;
     }
 
     regenerateScreen() {
         this._x = 0;
         this._y = 0;
-        this._screen = [];
-        this._screen.length = this.height;
-        this._screen = this._screen.map(x => '');
+        this.screen = Array.from({length:this.height},()=> '');
         for (let pos = 0; pos < this._raw.length; pos++) {
             const char = this._raw[pos];
             if (char == '\n') {
@@ -36,28 +28,34 @@ export class Buffer {
     newLine() {
         this._x = 0;
         if (this._y >= this.height - 1) {
-            this._screen.splice(0, 1);
-            this._screen.push('')
+            this.screen.splice(0, 1);
+            this.screen.push('')
         } else {
             this._y++;
         }
     }
 
     newChar(char) {
-        this._screen[this._y] += char;
+        this.screen[this._y] += char;
         this._x++;
         if (this._x >= this.width) {
             this.newLine();
         }
     }
 
+    addRaw(data) {
+        this._raw += data;
+        this.regenerateScreen();
+    }
+
     redraw(x, y) {
-        if (!this._screen)
+        if (!this.screen)
             this.regenerateScreen();
 
-        for (let i = 0; i < this._screen.length; i++) {
-            process.stdout.cursorTo(x, y + i);
-            process.stdout.write(this._screen[i]);
-        }
+        if (this.writeToStdOut)
+            for (let i = 0; i < this.screen.length; i++) {
+                process.stdout.cursorTo(x, y + i);
+                process.stdout.write(this.screen[i]);
+            }
     }
 }
