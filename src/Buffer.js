@@ -12,7 +12,7 @@ export class Buffer {
     regenerateScreen() {
         this._x = 0;
         this._y = 0;
-        this.screen = Array.from({length:this.height},()=> '');
+        this.screen = Array.from({length: this.height}, () => '');
         for (let pos = 0; pos < this._raw.length; pos++) {
             const char = this._raw[pos];
             if (char == '\n') {
@@ -49,8 +49,7 @@ export class Buffer {
     }
 
     redraw(x, y) {
-        if (!this.screen)
-            this.regenerateScreen();
+        this.regenerateScreen();
 
         if (this.writeToStdOut)
             for (let i = 0; i < this.screen.length; i++) {

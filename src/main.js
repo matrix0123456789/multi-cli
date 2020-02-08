@@ -1,6 +1,7 @@
 import {Buffer} from "./Buffer.js";
 
 import {spawn} from "child_process"
+
 let currentTask = null;
 let isInside = false;
 
@@ -10,17 +11,42 @@ class SubTask {
         this.buffer = '';
         const proc = spawn(path, args);
         this.buffer = new Buffer(proc);
+        this.x = 0;
+        this.y = 0;
+        this._width = 80;
+        this._height = 25;
 
         proc.on('close', (code) => {
             // console.log(`child process exited with code ${code}`);
         });
         proc.stdout.on('data', (data) => {
             this.buffer.addRaw(data);
+            this.draw();
         });
 
         proc.stderr.on('data', (data) => {
             this.buffer.addRaw(data);
+            this.draw();
         });
+        this.draw();
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this._width = value;
+        this.buffer.width = value - 1;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this._height = value;
+        this.buffer.height = value - 1;
     }
 
     draw() {
@@ -52,8 +78,9 @@ class SubTask {
         }
         process.stdout.write('\x1B[0m');
     }
-    drawBuffer(){
-        this.buffer.redraw(this.x, this.y+1);
+
+    drawBuffer() {
+        this.buffer.redraw(this.x, this.y + 1);
     }
 }
 
@@ -63,7 +90,6 @@ let tasks = process.argv.splice(2).map(x => {
 });
 currentTask = tasks[0];
 
-import tty from "tty";
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.setRawMode(true);
