@@ -18,7 +18,7 @@
         "mocha": "^7.0.1"
     },
     "scripts": {
-        "test": "mocha  --require babel-core/register tests"
+        "test": "mocha   tests"
     },
     "babel": {
         "presets": [

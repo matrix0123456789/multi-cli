@@ -1,18 +1,16 @@
 export class Buffer {
-    constructor(width = 80, height = 25, writeToStdOut = true) {
-        this.width = width;
-        this.height = height;
+    constructor(output={}) {
+        this.output={x:0,y:0,width:80,height:25, stream:null, ...output};
         this._raw = '';
         this.screen = [];
         this._x = 0;
         this._y = 0;
-        this.writeToStdOut = writeToStdOut;
     }
 
     regenerateScreen() {
         this._x = 0;
         this._y = 0;
-        this.screen = Array.from({length: this.height}, () => '');
+        this.screen = Array.from({length: this.output.height}, () => '');
         for (let pos = 0; pos < this._raw.length; pos++) {
             const char = this._raw[pos];
             if (char == '\n') {
@@ -27,7 +25,7 @@ export class Buffer {
 
     newLine() {
         this._x = 0;
-        if (this._y >= this.height - 1) {
+        if (this._y >= this.output.height - 1) {
             this.screen.splice(0, 1);
             this.screen.push('')
         } else {
@@ -38,7 +36,7 @@ export class Buffer {
     newChar(char) {
         this.screen[this._y] += char;
         this._x++;
-        if (this._x >= this.width) {
+        if (this._x >= this.output.width) {
             this.newLine();
         }
     }
@@ -48,13 +46,13 @@ export class Buffer {
         this.regenerateScreen();
     }
 
-    redraw(x, y) {
+    redraw() {
         this.regenerateScreen();
 
-        if (this.writeToStdOut)
+        if (this.output.stream)
             for (let i = 0; i < this.screen.length; i++) {
-                process.stdout.cursorTo(x, y + i);
-                process.stdout.write(this.screen[i]);
+                this.output.stream.cursorTo(this.output.x, this.output.y + i);
+                this.output.stream.write(this.screen[i]);
             }
     }
 }
