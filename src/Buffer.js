@@ -1,6 +1,6 @@
 export class Buffer {
-    constructor(output={}) {
-        this.output={x:0,y:0,width:80,height:25, stream:null, ...output};
+    constructor(output = {}) {
+        this.output = Object.assign({x: 0, y: 0, width: 80, height: 25, stream: null}, output);
         this._raw = '';
         this.screen = [];
         this._x = 0;

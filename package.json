@@ -4,13 +4,13 @@
     "main": "src/main.js",
     "author": "Mateusz Krawczyk",
     "license": "MIT",
-    "type": "module",
     "bin": "./src/main.js",
     "dependencies": {
         "enumify-fork": "^1.2.0"
     },
     "devDependencies": {
         "babel-core": "^6.26.0",
+        "babel-plugin-dynamic-import-node-sync": "^1.0.1",
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.6.0",
         "chai": "^4.2.0",
@@ -18,11 +18,13 @@
         "mocha": "^7.0.1"
     },
     "scripts": {
-        "test": "mocha   tests"
+        "test": "mocha  tests --require babel-core/register tests"
     },
+    "type": "module",
     "babel": {
         "presets": [
             "env"
-        ]
+        ],
+        "plugins": ["dynamic-import-node-sync"]
     }
 }
