@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {Manager} from "./Manager.js";
 
 import {spawn} from "child_process"
