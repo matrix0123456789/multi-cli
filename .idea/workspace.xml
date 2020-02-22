@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="482aef29-c5ab-4fb7-b530-e5d56a27c59f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Buffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Buffer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Buffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Buffer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="482aef29-c5ab-4fb7-b530-e5d56a27c59f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +139,7 @@
       <workItem from="1582128443181" duration="1920000" />
       <workItem from="1582133662396" duration="6000" />
       <workItem from="1582133911948" duration="830000" />
-      <workItem from="1582369975565" duration="2919000" />
+      <workItem from="1582369975565" duration="3179000" />
     </task>
     <task id="LOCAL-00001" summary="buffer passings first etsts">
       <created>1581157381455</created>
@@ -182,7 +176,21 @@
       <option name="project" value="LOCAL" />
       <updated>1582370855151</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="tests">
+      <created>1582372922321</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1582372922321</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Release 0.1.0">
+      <created>1582373147062</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1582373147062</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +202,9 @@
     <MESSAGE value="reading is working" />
     <MESSAGE value="simple not interactive" />
     <MESSAGE value="cicd" />
-    <option name="LAST_COMMIT_MESSAGE" value="cicd" />
+    <MESSAGE value="tests" />
+    <MESSAGE value="Release 0.1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Release 0.1.0" />
   </component>
   <component name="WindowStateProjectService">
     <state x="734" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581253204861">
@@ -209,10 +219,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="980" y="367" key="#sample_buffer_read.1/0.0.2560.1400@0.0.2560.1400" timestamp="1582371106613" />
-    <state x="905" y="295" width="1282" height="1009" key="CommitChangelistDialog2" timestamp="1582372921395">
+    <state x="905" y="295" width="1282" height="1009" key="CommitChangelistDialog2" timestamp="1582373146273">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="905" y="295" width="1282" height="1009" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1582372921395" />
+    <state x="905" y="295" width="1282" height="1009" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1582373146273" />
     <state width="766" height="466" key="DebuggerActiveHint" timestamp="1581253529218">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -289,10 +299,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1065" y="411" key="RollbackChangesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1581155372668" />
-    <state x="872" y="422" key="Vcs.Push.Dialog.v2" timestamp="1582372925356">
+    <state x="872" y="422" key="Vcs.Push.Dialog.v2" timestamp="1582373148579">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="872" y="422" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1582372925356" />
+    <state x="872" y="422" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1582373148579" />
     <state x="976" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1582128561970">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -305,10 +315,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="936" y="330" key="run.anything.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1581253546237" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1582373137508">
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1582373332723">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1582373137508" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1582373332723" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
