@@ -2,19 +2,19 @@ import {Manager} from "./Manager.js";
 
 import {spawn} from "child_process"
 
-
 function parseCommand(command) {
     const splitted = command.split(' ');
     return {executable: splitted[0], args: splitted.slice(1)};
 }
 
 
-let processes = process.argv.splice(2).map(x => {
+let interactive = process.argv.some(x => x === '-i' || x === '--interactive');
+let processes = process.argv.splice(2).filter(x => x[0] !== '-').map(x => {
     const {executable, args} = parseCommand(x);
     return spawn(executable, args);
 });
 
-new Manager(process.stdin, process.stdout, processes)
+new Manager(process.stdin, process.stdout, processes, interactive)
 
 
 

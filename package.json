@@ -1,11 +1,11 @@
 {
-    "name": "reactive-promise-status",
-    "version": "1.0.5",
-    "main": "src/reactive-promise-status.js",
-    "repository": "https://github.com/matrix0123456789/reactive-promise-status",
+    "name": "multi-cli",
+    "version": "0.1.0",
+    "main": "src/main.js",
     "author": "Mateusz Krawczyk",
     "license": "MIT",
     "type": "module",
+    "bin": "./src/main.js",
     "dependencies": {
         "enumify-fork": "^1.2.0"
     },

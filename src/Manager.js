@@ -1,11 +1,12 @@
 import {SubTask} from "./SubTask.js";
 
 export class Manager {
-    constructor(stdin, stdout, proceses = []) {
+    constructor(stdin, stdout, proceses = [], interactive = false) {
         stdin.resume();
         stdin.setEncoding('utf8');
         stdin.setRawMode(true);
 
+        this.interactive = interactive;
         this._stdin = stdin;
         this._stdout = stdout;
         this.subTasks = [];
@@ -29,36 +30,41 @@ export class Manager {
             let chunk;
             // Use a loop to make sure we read all available data.
             while ((chunk = process.stdin.read()) !== null) {
-                if (this.isInside) {
-                    if (chunk.charCodeAt(0) === 4)//ctrl+d
-                        this.isInside = false;
-                    else {
-                        //this.subTasks[this.selectedIndex].proc.stdin.write("ping google.pl");
-                        this.subTasks[this.selectedIndex].proc.stdin.write(chunk);
-                        //this.subTasks[this.selectedIndex].proc.stdin.write("\n");
-                        //this.subTasks[this.selectedIndex].proc.stdin.write("aaa");
-                        //this.subTasks[this.selectedIndex].proc.stdin.flush()
-
-                        this.draw();
-                    }
-                } else {
+                if (!this.interactive) {
                     if (chunk.charCodeAt(0) === 3)
                         process.exit();
-                    else if (chunk.charCodeAt(0) === 13)//enter
-                        this.isInside = true;
-                    else if (chunk.charCodeAt(0) === 27) {//escape
-                        if (chunk.charCodeAt(1) === 91) {
-                            if (chunk.charCodeAt(2) === 67) {
-                                this.selectedIndex++;
-                                this.draw();
-                            }
-                            if (chunk.charCodeAt(2) === 68) {
-                                this.selectedIndex--;
-                                this.draw();
-                            }
+                } else {
+                    if (this.isInside) {
+                        if (chunk.charCodeAt(0) === 4)//ctrl+d
+                            this.isInside = false;
+                        else {
+                            //this.subTasks[this.selectedIndex].proc.stdin.write("ping google.pl");
+                            this.subTasks[this.selectedIndex].proc.stdin.write(chunk);
+                            //this.subTasks[this.selectedIndex].proc.stdin.write("\n");
+                            //this.subTasks[this.selectedIndex].proc.stdin.write("aaa");
+                            //this.subTasks[this.selectedIndex].proc.stdin.flush()
+
+                            this.draw();
                         }
-                    } else
-                        console.log(`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3));
+                    } else {
+                        if (chunk.charCodeAt(0) === 3)
+                            process.exit();
+                        else if (chunk.charCodeAt(0) === 13)//enter
+                            this.isInside = true;
+                        else if (chunk.charCodeAt(0) === 27) {//escape
+                            if (chunk.charCodeAt(1) === 91) {
+                                if (chunk.charCodeAt(2) === 67) {
+                                    this.selectedIndex++;
+                                    this.draw();
+                                }
+                                if (chunk.charCodeAt(2) === 68) {
+                                    this.selectedIndex--;
+                                    this.draw();
+                                }
+                            }
+                        } else
+                            console.log(`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3));
+                    }
                 }
             }
         });
@@ -86,7 +92,7 @@ export class Manager {
 
     _refreshStateOfSubTasks() {
         for (let i = 0; i < this.subTasks.length; i++) {
-            this.subTasks[i].isCurrentTask = i === this._selectedIndex;
+            this.subTasks[i].isCurrentTask = this.interactive && i === this._selectedIndex;
             this.subTasks[i].isInside = this.isInside && i === this._selectedIndex;
         }
     }
@@ -95,7 +101,7 @@ export class Manager {
         let x = 0;
         let ret = [];
         let width = this._stdout.columns || 80;
-        let height = this._stdout.rows || 25
+        let height = this._stdout.rows || 25;
         for (let i = 0; i < count; i++) {
             const item = {
                 x: x,
