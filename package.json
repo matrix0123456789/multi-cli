@@ -1,6 +1,6 @@
 {
     "name": "multi-cli",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "main": "src/main.js",
     "author": "Mateusz Krawczyk",
     "license": "MIT",
