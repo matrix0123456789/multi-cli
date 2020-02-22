@@ -25,6 +25,8 @@
         "presets": [
             "env"
         ],
-        "plugins": ["dynamic-import-node-sync"]
+        "plugins": [
+            "dynamic-import-node-sync"
+        ]
     }
 }
