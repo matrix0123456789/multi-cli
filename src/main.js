@@ -2,7 +2,9 @@
 
 import {Manager} from "./Manager.js";
 
-import {spawn} from "child_process"
+import {spawn, execSync} from "child_process"
+
+execSync("cmd /c chcp 65001");
 
 function parseCommand(command) {
     const splitted = command.split(' ');

@@ -11,6 +11,7 @@ export class SubTask {
 
         proc.stdin.resume();
         proc.stdin.setEncoding('utf8');
+        proc.stdout.setEncoding('utf8');
 
         proc.on('close', (code) => {
             this.status = 'closed';
