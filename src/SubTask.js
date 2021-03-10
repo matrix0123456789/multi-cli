@@ -1,16 +1,17 @@
 import {Buffer} from "./Buffer.js";
 
 export class SubTask {
-    constructor(proc, name, output = {}, onchange=null) {
+    constructor(proc, name, output = {}, onchange = null) {
         this._output = {x: 0, y: 0, width: 80, height: 25, stream: null, ...output};
         this.name = name;
         this.proc = proc;
         this.buffer = new Buffer(this._getBufferOutput());
         this.status = 'running';
-        this.onchange=onchange??(()=>{});
+        this.onchange = onchange ?? (() => {});
 
         proc.stdin.resume();
         proc.stdin.setEncoding('utf8');
+        proc.stdout.resume();
         proc.stdout.setEncoding('utf8');
 
         proc.on('close', (code) => {
@@ -74,7 +75,9 @@ export class SubTask {
             this.output.stream.write('\x1B[7m');
         }
         this.output.stream.write(name);
-        this.output.stream.write('\x1B[24m');
+        if (this.isCurrentTask && !this.isInside) {
+            this.output.stream.write('\x1B[0m');
+        }
         position += name.length;
         while (position < this.output.width) {
             this.output.stream.write('_');

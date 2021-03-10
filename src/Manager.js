@@ -36,13 +36,17 @@ export class Manager {
                 } else {
                     if (this.isInside) {
                         if (chunk.charCodeAt(0) === 4)//ctrl+d
+                        {
                             this.isInside = false;
+                            this.draw();
+                        }
+                        else if (chunk.charCodeAt(0) === 13)//enter
+                        {
+                            this.subTasks[this.selectedIndex].proc.stdin.write("\r\n");
+                            this.draw();
+                        }
                         else {
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("ping google.pl");
                             this.subTasks[this.selectedIndex].proc.stdin.write(chunk);
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("\n");
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("aaa");
-                            //this.subTasks[this.selectedIndex].proc.stdin.flush()
 
                             this.draw();
                         }
@@ -50,7 +54,10 @@ export class Manager {
                         if (chunk.charCodeAt(0) === 3)
                             process.exit();
                         else if (chunk.charCodeAt(0) === 13)//enter
+                        {
                             this.isInside = true;
+                            this.draw();
+                        }
                         else if (chunk.charCodeAt(0) === 27) {//escape
                             if (chunk.charCodeAt(1) === 91) {
                                 if (chunk.charCodeAt(2) === 67) {
@@ -62,8 +69,8 @@ export class Manager {
                                     this.draw();
                                 }
                             }
-                        } else
-                            console.log(`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3));
+                        } //else
+                           // console.log(`data:`,chunk, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3));
                     }
                 }
             }
