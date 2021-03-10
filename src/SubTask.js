@@ -1,17 +1,21 @@
 import {Buffer} from "./Buffer.js";
 
 export class SubTask {
-    constructor(proc, name, output = {}) {
+    constructor(proc, name, output = {}, onchange=null) {
         this._output = {x: 0, y: 0, width: 80, height: 25, stream: null, ...output};
         this.name = name;
-        this.proc=proc;
+        this.proc = proc;
         this.buffer = new Buffer(this._getBufferOutput());
+        this.status = 'running';
+        this.onchange=onchange??(()=>{});
 
         proc.stdin.resume();
         proc.stdin.setEncoding('utf8');
 
         proc.on('close', (code) => {
-            // console.log(`child process exited with code ${code}`);
+            this.status = 'closed';
+            this.draw();
+            this.onchange();
         });
         proc.stdout.on('data', (data) => {
             this.buffer.addRaw(data);
@@ -51,12 +55,16 @@ export class SubTask {
 
 
     drawHeader() {
+        let name = this.name;
+        if (this.status === 'closed') {
+            name = '*' + name + '*';
+        }
         this.output.stream.cursorTo(this.output.x, this.output.y);
         if (this.isCurrentTask && this.isInside) {
             this.output.stream.write('\x1B[7m');
         }
         let position = 0;
-        while (position < (this.output.width - this.name.length) / 2) {
+        while (position < (this.output.width - name.length) / 2) {
             this.output.stream.write('_');
             position++;
         }
@@ -64,9 +72,9 @@ export class SubTask {
         if (this.isCurrentTask && !this.isInside) {
             this.output.stream.write('\x1B[7m');
         }
-        this.output.stream.write(this.name);
+        this.output.stream.write(name);
         this.output.stream.write('\x1B[24m');
-        position += this.name.length;
+        position += name.length;
         while (position < this.output.width) {
             this.output.stream.write('_');
             position++;

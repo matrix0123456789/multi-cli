@@ -12,7 +12,7 @@ export class Manager {
         this.subTasks = [];
         const sizes = this._getSizes(proceses.length)
         for (let i = 0; i < proceses.length; i++) {
-            this.subTasks[i] = new SubTask(proceses[i], proceses[i].spawnfile, sizes[i])
+            this.subTasks[i] = new SubTask(proceses[i], proceses[i].spawnfile, sizes[i], () => this.subTaskChanges())
         }
         this.isInside = false;
         this.selectedIndex = 0;
@@ -119,5 +119,13 @@ export class Manager {
     draw() {
         this._stdout.write('\x1b[2J');
         this.subTasks.forEach(x => x.draw())
+    }
+
+    subTaskChanges() {
+        if (!this.interactive) {
+            if (this.subTasks.every(x => x.status == 'closed')) {
+                process.exit();
+            }
+        }
     }
 }
