@@ -1,4 +1,6 @@
 import {SubTask} from "./SubTask.js";
+import {log} from "./debug.js";
+import {spawn} from "child_process";
 
 export class Manager {
     constructor(stdin, stdout, proceses = [], interactive = false) {
@@ -18,10 +20,7 @@ export class Manager {
         this.selectedIndex = 0;
 
         stdout.on('resize', () => {
-            const sizes = this._getSizes(this.subTasks.length)
-            for (let i = 0; i < this.subTasks.length; i++) {
-                this.subTasks[i].output = sizes[i];
-            }
+            this.refreshSize()
             this.draw();
         });
         this.draw();
@@ -30,14 +29,22 @@ export class Manager {
             let chunk;
             // Use a loop to make sure we read all available data.
             while ((chunk = process.stdin.read()) !== null) {
+                log(JSON.stringify({
+                    interactive: this.interactive,
+                    isInside: this.isInside,
+                    selectedIndex: this.selectedIndex
+                }))
+                log('readable: ' + JSON.stringify(Array.from(chunk).map(x => x.charCodeAt(0))));
                 if (!this.interactive) {
                     if (chunk.charCodeAt(0) === 3)
                         process.exit();
                 } else {
                     if (this.isInside) {
                         if (chunk.charCodeAt(0) === 4)//ctrl+d
+                        {
                             this.isInside = false;
-                        else {
+                            this.draw();
+                        } else {
                             //this.subTasks[this.selectedIndex].proc.stdin.write("ping google.pl");
                             this.subTasks[this.selectedIndex].proc.stdin.write(chunk);
                             //this.subTasks[this.selectedIndex].proc.stdin.write("\n");
@@ -50,8 +57,21 @@ export class Manager {
                         if (chunk.charCodeAt(0) === 3)
                             process.exit();
                         else if (chunk.charCodeAt(0) === 13)//enter
+                        {
                             this.isInside = true;
-                        else if (chunk.charCodeAt(0) === 27) {//escape
+                            this.draw();
+                        }else if (chunk.charCodeAt(0) ===20)//ctrl+t
+                        {
+                            let process= spawn('cmd');
+                            this.subTasks.push(new SubTask(process, 'cmd', {}))
+                            this.refreshSize();
+                            this.draw();
+                        }else if (chunk.charCodeAt(0) ===24)//ctrl+x
+                        {
+          let removed=this.subTasks.splice(this.selectedIndex,1);
+this.refreshSize();
+                            this.draw();
+                        } else if (chunk.charCodeAt(0) === 27) {//escape
                             if (chunk.charCodeAt(1) === 91) {
                                 if (chunk.charCodeAt(2) === 67) {
                                     this.selectedIndex++;
@@ -63,14 +83,19 @@ export class Manager {
                                 }
                             }
                         } else
-                            console.log(`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3));
+                            log([`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3)]);
                     }
                 }
             }
         });
 
     }
-
+refreshSize(){
+    const sizes = this._getSizes(this.subTasks.length)
+    for (let i = 0; i < this.subTasks.length; i++) {
+        this.subTasks[i].output = sizes[i];
+    }
+}
     get selectedIndex() {
         return this._selectedIndex;
     }

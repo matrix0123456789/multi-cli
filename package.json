@@ -20,7 +20,8 @@
         "mocha": "^7.0.1"
     },
     "scripts": {
-        "test": "mocha  tests --require babel-core/register tests"
+        "test": "mocha  tests --require babel-core/register tests",
+        "demo": "node src/main.js -i cmd cmd"
     },
     "type": "module",
     "babel": {
