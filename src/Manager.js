@@ -14,7 +14,7 @@ export class Manager {
         this.subTasks = [];
         const sizes = this._getSizes(proceses.length)
         for (let i = 0; i < proceses.length; i++) {
-            this.subTasks[i] = new SubTask(proceses[i], proceses[i].spawnfile, sizes[i])
+            this.subTasks[i] = new SubTask(proceses[i], proceses[i].spawnfile, sizes[i], () => this.subTaskChanges())
         }
         this.isInside = false;
         this.selectedIndex = 0;
@@ -44,12 +44,12 @@ export class Manager {
                         {
                             this.isInside = false;
                             this.draw();
+                        } else if (chunk.charCodeAt(0) === 13)//enter
+                        {
+                            this.subTasks[this.selectedIndex].proc.stdin.write("\r\n");
+                            this.draw();
                         } else {
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("ping google.pl");
                             this.subTasks[this.selectedIndex].proc.stdin.write(chunk);
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("\n");
-                            //this.subTasks[this.selectedIndex].proc.stdin.write("aaa");
-                            //this.subTasks[this.selectedIndex].proc.stdin.flush()
 
                             this.draw();
                         }
@@ -60,16 +60,16 @@ export class Manager {
                         {
                             this.isInside = true;
                             this.draw();
-                        }else if (chunk.charCodeAt(0) ===20)//ctrl+t
+                        } else if (chunk.charCodeAt(0) === 20)//ctrl+t
                         {
-                            let process= spawn('cmd');
+                            let process = spawn('cmd');
                             this.subTasks.push(new SubTask(process, 'cmd', {}))
                             this.refreshSize();
                             this.draw();
-                        }else if (chunk.charCodeAt(0) ===24)//ctrl+x
+                        } else if (chunk.charCodeAt(0) === 24)//ctrl+x
                         {
-          let removed=this.subTasks.splice(this.selectedIndex,1);
-this.refreshSize();
+                            let removed = this.subTasks.splice(this.selectedIndex, 1);
+                            this.refreshSize();
                             this.draw();
                         } else if (chunk.charCodeAt(0) === 27) {//escape
                             if (chunk.charCodeAt(1) === 91) {
@@ -82,20 +82,24 @@ this.refreshSize();
                                     this.draw();
                                 }
                             }
-                        } else
+                        } else {
                             log([`data:`, chunk.charCodeAt(0), chunk.charCodeAt(1), chunk.charCodeAt(2), chunk.charCodeAt(3)]);
+
+                        }
                     }
                 }
             }
         });
 
     }
-refreshSize(){
-    const sizes = this._getSizes(this.subTasks.length)
-    for (let i = 0; i < this.subTasks.length; i++) {
-        this.subTasks[i].output = sizes[i];
+
+    refreshSize() {
+        const sizes = this._getSizes(this.subTasks.length)
+        for (let i = 0; i < this.subTasks.length; i++) {
+            this.subTasks[i].output = sizes[i];
+        }
     }
-}
+
     get selectedIndex() {
         return this._selectedIndex;
     }
@@ -144,5 +148,13 @@ refreshSize(){
     draw() {
         this._stdout.write('\x1b[2J');
         this.subTasks.forEach(x => x.draw())
+    }
+
+    subTaskChanges() {
+        if (!this.interactive) {
+            if (this.subTasks.every(x => x.status == 'closed')) {
+                process.exit();
+            }
+        }
     }
 }

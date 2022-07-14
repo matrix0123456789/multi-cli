@@ -1,17 +1,24 @@
 import {Buffer} from "./Buffer.js";
 
 export class SubTask {
-    constructor(proc, name, output = {}) {
+    constructor(proc, name, output = {}, onchange = null) {
         this._output = {x: 0, y: 0, width: 80, height: 25, stream: null, ...output};
         this.name = name;
-        this.proc=proc;
+        this.proc = proc;
         this.buffer = new Buffer(this._getBufferOutput());
+        this.status = 'running';
+        this.onchange = onchange ?? (() => {
+        });
 
         proc.stdin.resume();
         proc.stdin.setEncoding('utf8');
+        proc.stdout.resume();
+        proc.stdout.setEncoding('utf8');
 
         proc.on('close', (code) => {
-            // console.log(`child process exited with code ${code}`);
+            this.status = 'closed';
+            this.draw();
+            this.onchange();
         });
         proc.stdout.on('data', (data) => {
             this.buffer.addRaw(data);
@@ -51,26 +58,32 @@ export class SubTask {
 
 
     drawHeader() {
-        if(!this.output.stream)return;
+        if (!this.output.stream) return;
+
+        let name = this.name;
+        if (this.status === 'closed') {
+            name = '*' + name + '*';
+        }
         this.output.stream.cursorTo(this.output.x, this.output.y);
         if (this.isCurrentTask) {
-            if(this.isInside)
-            this.output.stream.write('\x1B[7m');
+            if (this.isInside)
+                this.output.stream.write('\x1B[7m');
         }
         this.output.stream.write('\x1B[4m');
         let position = 0;
+
         while (position < (this.output.width - this.name.length) / 2) {
             this.output.stream.write(' ');
             position++;
         }
         //process.stdout.write('\x1B[4m');
-        if (this.isCurrentTask){
-            if(!this.isInside)
-            this.output.stream.write('\x1B[7m');
+        if (this.isCurrentTask) {
+            if (!this.isInside)
+                this.output.stream.write('\x1B[7m');
         }
         this.output.stream.write(this.name);
-        if (this.isCurrentTask){
-            if(!this.isInside)
+        if (this.isCurrentTask) {
+            if (!this.isInside)
                 this.output.stream.write('\x1B[27m');
         }
         position += this.name.length;

@@ -183,7 +183,7 @@
       <workItem from="1582133662396" duration="6000" />
       <workItem from="1582133911948" duration="830000" />
       <workItem from="1582369975565" duration="7035000" />
-      <workItem from="1657813021968" duration="3736000" />
+      <workItem from="1657813021968" duration="4103000" />
     </task>
     <task id="LOCAL-00001" summary="buffer passings first etsts">
       <created>1581157381455</created>
@@ -327,12 +327,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/SubTask.js</url>
-          <line>16</line>
+          <line>23</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/SubTask.js</url>
-          <line>21</line>
+          <line>28</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
