@@ -1,0 +1,9 @@
+Package: multi-cli
+Version: 0.2.1
+Section: base
+Priority: optional
+Architecture: all
+Installed-Size: SIZE
+Depends: nodejs
+Maintainer: Mateusz Krawczyk <mateusz.krawczyk@green-code.studio>
+Description: Simple tool to running multiple console aplication in one console window.
